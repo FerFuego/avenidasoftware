@@ -21,7 +21,7 @@
 <section class="content">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-6 connectedSortable">
+			<div class="col-8 connectedSortable">
 				@foreach( $sucursals as $j => $sucursal)
 	
 					<div class="card">

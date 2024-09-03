@@ -24,7 +24,7 @@
         <div class="container-fluid">
 			<div class="row">
 
-				<div class="col-lg-3 col-6">
+				{{-- <div class="col-lg-3 col-6">
 					<div class="small-box bg-info">
 						<div class="inner">
 							<h3>100</h3>
@@ -35,9 +35,9 @@
 						</div>
 						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
-				</div>
+				</div> --}}
 				
-				<div class="col-lg-3 col-6">
+				{{-- <div class="col-lg-3 col-6">
 					<div class="small-box bg-success">
 						<div class="inner">                        
 							<h3><sup style="font-size: 20px">$</sup>000</h3>
@@ -48,7 +48,7 @@
 						</div>
 						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
-				</div>
+				</div> --}}
 				
 				{{-- <div class="col-lg-3 col-6">
 					<div class="small-box bg-warning">
@@ -80,89 +80,54 @@
 		</div>
 		
         <div class="row">
-
-            {{-- <section class="col-lg-7 connectedSortable">
-				@foreach( $sucursals as $j => $sucursal)
-
-					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">Lista de Tareas Diarias</h3>
-							<div class="card-tools">
-								<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
-								<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"><i class="fas fa-times"></i></button>
-							</div>
-						</div>
-						<div class="card-body">							
-							<ul class="todo-list ui-sortable" data-widget="todo-list">
-								@foreach( $sucursal->todo_lists as $k => $task )
-									@if ( $task->created_at->format('d') == date('d') )
-										<li class="{{ $task->is_complete ? 'done' : '' }}">
-											<span class="handle">
-												<i class="fas fa-ellipsis-v"></i>
-												<i class="fas fa-ellipsis-v"></i>
-											</span>
-											<div  class="icheck-primary d-inline ml-2">
-												<input type="checkbox" value="{{ $task->id }}" name="task_id" id="todoCheck{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
-												<label for="todoCheck{{ $j.$k }}" title="Finalizar Tarea"></label>
-											</div>
-											<span class="text">{{ $task->name }}</span>
-											<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
-											<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
-												<i class="fas fa-edit" title="En Proceso"></i>
-											</div>
-										</li>
-									@endif
-								@endforeach
-							</ul>
-						</div>
-						<div class="card-footer">
-							Sucursal: {{ $sucursal->name }}
+			<!-- Lista de Tareas -->
+			@can('isOperario')
+				<section class="col-lg-8 connectedSortable">
+					<div class="row">
+						<div class="col-12 connectedSortable">
+							@foreach( $sucursals as $j => $sucursal)
+				
+								<div class="card">
+									<div class="card-header">
+										<h3 class="card-title"><strong>Lista de Tareas</strong> - {{ $sucursal->name }}</h3>
+										<div class="card-tools">
+											<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+											<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"><i class="fas fa-times"></i></button>
+										</div>
+									</div>
+									<div class="card-body">							
+										<ul class="todo-list ui-sortable" data-widget="todo-list">
+											@foreach( $sucursal->todo_lists as $k => $task )
+												@if ( $task->created_at->format('d') == date('d') )
+													<li class="{{ $task->is_complete ? 'done' : '' }}">
+														<span class="handle">
+															<i class="fas fa-ellipsis-v"></i>
+															<i class="fas fa-ellipsis-v"></i>
+														</span>
+														<div  class="icheck-primary d-inline ml-2">
+															<input type="checkbox" value="{{ $task->id }}" name="task_id" id="todoCheck{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
+															<label for="todoCheck{{ $j.$k }}" title="Finalizar Tarea"></label>
+														</div>
+														<span class="text">{{ $task->name }}</span>
+														<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
+														<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
+															<i class="fas fa-edit" title="En Proceso"></i>
+														</div>
+													</li>
+												@endif
+											@endforeach
+										</ul>
+									</div>
+									<div class="card-footer">
+										<strong>Dirección:</strong> {{ $sucursal->address }} |  <strong>Horario:</strong> {{ $sucursal->schedule }}
+									</div>
+								</div>
+				
+							@endforeach
 						</div>
 					</div>
-
-				@endforeach
-			</section> --}}
-			
-			<section class="col-lg-5 connectedSortable">
-				<!-- Calendar -->
-                <div class="card bg-gradient-success">
-                    <div class="card-header border-0">
-                        <h3 class="card-title">
-                            <i class="far fa-calendar-alt"></i>
-                            Calendario
-                        </h3>
-                        <!-- tools card -->
-                        <div class="card-tools">
-                            <!-- button with a dropdown -->
-                            {{-- <div class="btn-group">
-                                <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                                <i class="fas fa-bars"></i></button>
-                                <div class="dropdown-menu" role="menu">
-                                    <a href="#" class="dropdown-item">Agregar Evento</a>
-                                    <a href="#" class="dropdown-item">Eliminar evento</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="#" class="dropdown-item">Ver calendario</a>
-                                </div>
-                            </div> --}}
-                            <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <!-- /. tools -->
-                    </div>
-                    <!-- /.card-header -->
-                    <div class="card-body pt-0">
-                        <!--The calendar -->
-                        <div id="calendar" style="width: 100%"></div>
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-				<!-- /.card -->
-			</section>
-			
+				</section>
+			@endcan
 		</div>
 		
     </section>

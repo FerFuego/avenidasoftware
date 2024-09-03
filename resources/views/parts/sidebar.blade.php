@@ -26,13 +26,8 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                     with font-awesome or any other icon font library -->
-                @cannot('isProveedor')    
-                    <li class="nav-item has-treeview">
-                        <a href="{{ url('/') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
+                @cannot('isOperario')    
+                    {{-- Nothing --}}
                 @endcannot
 
                 @can('isSuper')
@@ -92,21 +87,6 @@
                     </li>
                 @endcanany
 
-                @can('isGerente')
-                    <li class="nav-item">
-                        <a href="{{ url('/bookings') }}" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>Deposito</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/todos/check') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tasks"></i>
-                            <p>Tareas</p>
-                        </a>
-                    </li>
-                @endcan
-
                 @can('isEncargado')
                     <li class="nav-item">
                         <a href="{{ url('/todos/check') }}" class="nav-link">
@@ -116,11 +96,11 @@
                     </li>
                 @endcan
 
-                @can('isProveedor')
-                    <li class="nav-item">
-                        <a href="{{ url('/bookings/create') }}" class="nav-link">
-                            <i class="nav-icon fas fa-calendar"></i>
-                            <p>Turnos</p>
+                @can('isOperario')
+                    <li class="nav-item has-treeview">
+                        <a href="{{ url('/') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>Dashboard</p>
                         </a>
                     </li>
                 @endcan

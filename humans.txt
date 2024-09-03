@@ -1,12 +1,3 @@
-ADMIN
-+6nFRxU4Ot5
-
-
-
-DATABASE
-name: u923860411_Avenida
-user: u923860411_admin
-pass: 4G&u1!+XaW
 
 RUN SCHEDULES
 php artisan diary:tasks
