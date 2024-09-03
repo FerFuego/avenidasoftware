@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 
 use DB;
 use Auth;
-use App\Models\Sale;
-use App\Services\SaleService;
 use Illuminate\Http\Request;
 use App\Models\Notification;
 
@@ -25,31 +23,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(SaleService $service)
+    public function index()
     {
-        $user = Auth::user();
-        
-        if ($user->roles->first()->slug == 'proveedor') {            
-            return redirect('bookings/create');
-        }
-
-        $sucursals = auth()->user()->sucursals;
-        
-        $sucursals_ids = $sucursals->pluck('id');
-
-        $sales = DB::table('sales')
-                    ->join('sales_sucursals', 'sales.id', '=', 'sales_sucursals.sale_id' )
-                    ->whereIn('sales_sucursals.sucursal_id', $sucursals_ids )
-                    ->select('sales.*')
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-
-        $salesToday = $service->calcDailySales($sales);
-        
-        return view('home', [
-            'sucursals' => $sucursals,
-            'salesToday' => $salesToday
-        ]);
+        return view('home');
     }
 
 }

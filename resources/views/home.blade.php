@@ -27,26 +27,26 @@
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-info">
 						<div class="inner">
-							<h3>{{ $salesToday['clients'] }}</h3>
+							<h3>100</h3>
 							<p>Total Clientes</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-ios-people"></i>
 						</div>
-						<a href="/sales" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				
 				<div class="col-lg-3 col-6">
 					<div class="small-box bg-success">
 						<div class="inner">                        
-							<h3><sup style="font-size: 20px">$</sup>{{ $salesToday['sales'] }}</h3>
+							<h3><sup style="font-size: 20px">$</sup>000</h3>
 							<p>Total Ventas</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-stats-bars"></i>
 						</div>
-						<a href="/sales" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
 				</div>
 				
@@ -122,64 +122,6 @@
 
 				@endforeach
 			</section> --}}
-
-			<section class="col-lg-5 connectedSortable">
-				{{-- ABM Sales --}}
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">Cargar Ventas</h3>
-						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
-							<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"><i class="fas fa-times"></i></button>
-						</div>
-					</div>
-					<div class="card-body">
-						<form action="{{ route('sales.store') }}" method="POST">
-							{{ csrf_field() }}
-							<div class="form-group">
-								<label for="sucursal">Sucursal</label>
-								<select name="sucursal" id="select_sucursal" class="form-control selectpicker" data-live-search="true">
-									<option>Seleccione Sucursal</option>
-									@foreach ( $sucursals as $sucursal )
-										<option value="{{ $sucursal->id }}" @if ($loop->first) selected @endif>{{ $sucursal->name }}</option>
-									@endforeach
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="turn">Turno</label>
-								<select name="turn" class="form-control">
-									<option>Seleccione Turno</option>
-									<option value="13hs">13hs</option>
-									<option value="17hs">17hs</option>
-									<option value="22hs">22hs</option>
-									<option value="23hs">23hs</option>
-								</select>
-							</div>
-							<div class="form-group">
-								<label for="amount">Importe parcial en turno</label>
-								<input type="text" name="amount" id="amount" class="form-control" placeholder="200000" value="{{ old('amount') }}" required>
-								@error('amount')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-							<div class="form-group">
-								<label for="clients">Cantidad de clientes en turno</label>
-								<input type="text" name="clients" id="clients" class="form-control" placeholder="2000" value="{{ old('clients') }}" required>
-								@error('clients')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-								@enderror
-							</div>
-							<input type="submit" value="Guardar" class="btn btn-success float-right">
-						</form> 
-					</div>
-					<!-- /.card-body -->
-				</div>
-				{{-- /. ABM Sales --}}
-			</section>
 			
 			<section class="col-lg-5 connectedSortable">
 				<!-- Calendar -->

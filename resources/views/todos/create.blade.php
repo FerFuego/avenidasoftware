@@ -34,9 +34,9 @@
             <form action="{{ route('todos.store') }}" method="POST">
                 {{ csrf_field() }}
                 <div class="form-group">
-                  <label for="sucursal">Sucursal</label>
+                  <label for="sucursal">Inmueble</label>
                   <select name="sucursal" id="select_sucursal" class="form-control selectpicker" data-live-search="true" required>
-                    <option>Seleccione Sucursal</option>
+                    <option>Seleccione Inmueble</option>
                     @foreach ( $sucursals as $sucursal )
                       <option value="{{ $sucursal->id }}">{{ $sucursal->name }}</option>
                     @endforeach

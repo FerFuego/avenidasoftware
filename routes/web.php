@@ -31,26 +31,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController')->middleware('role:superadmin,admin');
     Route::resource('roles', 'RolesController')->middleware('can:isSuper');
     Route::resource('sucursals', 'SucursalController')->middleware('role:superadmin,admin');
-    Route::resource('sales', 'SalesController');
     Route::resource('tasks', 'TaskController');
     Route::get('todos/check', 'TodoController@check');
     Route::resource('todos', 'TodoController')->middleware('role:superadmin,admin');
     Route::resource('todolists', 'TodoListController');
     Route::resource('notifications', 'NotificationController');
-    Route::resource('offers', 'OfferController');
-    Route::resource('rrhhs', 'RRhhController');
-    Route::post('bookings/report', 'BookingController@show')->name('bookings.report');
-    Route::post('bookings/report/month', 'BookingController@report')->name('bookings.report.month');
-    Route::resource('bookings', 'BookingController');
     Route::get('download/{file}', function ($file) {
         return Response::download( public_path('uploads/') . $file);
     });
-    Route::get('offers/print/{id}', 'OfferController@download');
-    Route::post('sales/filter', 'SalesController@filter');
-    Route::post('bookings/filter', 'BookingController@filter');
-    Route::post('bookings/state', 'BookingController@state');
-    Route::post('bookings/day', 'BookingController@getBookingsDay');
-    Route::post('bookings', 'BookingController@store')->name('storeBooking');
 });
 
 

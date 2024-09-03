@@ -6,13 +6,13 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>Gestion de Sucursales</h1>
+				<h1>Gestion de Inmuebles</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/sucursals') }}">Sucursales</a></li>
-					<li class="breadcrumb-item active">Ver Sucursal</li>
+					<li class="breadcrumb-item"><a href="{{ url('/sucursals') }}">Inmuebles</a></li>
+					<li class="breadcrumb-item active">Ver Inmueble</li>
 				</ol>
 			</div>
 		</div>

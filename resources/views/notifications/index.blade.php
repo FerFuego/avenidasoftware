@@ -44,7 +44,7 @@
                                     <th>Titulo</th>
                                     <th>Detalle</th>
                                     <th>Usuario</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Estado</th>
                                     <td>Acciones</td>
                                 </tr>
@@ -57,7 +57,7 @@
                                     <th>Titulo</th>
                                     <th>Detalle</th>
                                     <th>Usuario</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Estado</th>
                                     <td>Acciones</td>
                                 </tr>

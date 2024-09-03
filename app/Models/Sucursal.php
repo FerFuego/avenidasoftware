@@ -17,7 +17,7 @@ class Sucursal extends Model
         'schedule'
     ];
 
-    protected $with = ['sales', 'todo_lists'];
+    protected $with = ['todo_lists'];
 
     /**
      * Relationships
@@ -25,10 +25,6 @@ class Sucursal extends Model
      */
     public function users () {
         return $this->belongsToMany(User::class, 'users_sucursals');
-    }
-
-    public function sales () {
-        return $this->belongsToMany(Sale::class, 'sales_sucursals');
     }
 
     public function todo_lists () {

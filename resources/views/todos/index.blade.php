@@ -41,7 +41,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Dias</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -50,7 +50,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Dias</th>
                                     <th>Acciones</th>
                                 </tr>

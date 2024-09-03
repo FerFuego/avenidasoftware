@@ -55,13 +55,7 @@
                     <li class="nav-item">
                         <a href="{{ url('/sucursals') }}" class="nav-link">
                             <i class="nav-icon fas fa-store"></i>
-                            <p>Sucursales</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/sales') }}" class="nav-link">
-                            <i class="nav-icon fas fa-money-check-alt"></i>
-                            <p>Ventas</p>
+                            <p>Inmuebles</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -96,24 +90,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/offers') }}" class="nav-link">
-                            <i class="nav-icon fas fa-percent"></i>
-                            <p>Banners</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/rrhhs') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user-plus"></i>
-                            <p>RRHH</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/bookings') }}" class="nav-link">
-                            <i class="nav-icon far fa-calendar-alt"></i>
-                            <p>Reservas</p>
-                        </a>
-                    </li>
                 @endcanany
 
                 @can('isGerente')
@@ -121,12 +97,6 @@
                         <a href="{{ url('/bookings') }}" class="nav-link">
                             <i class="nav-icon far fa-calendar-alt"></i>
                             <p>Deposito</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ url('/sales') }}" class="nav-link">
-                            <i class="nav-icon fas fa-money-check-alt"></i>
-                            <p>Ventas</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -138,12 +108,6 @@
                 @endcan
 
                 @can('isEncargado')
-                    <li class="nav-item">
-                        <a href="{{ url('/sales') }}" class="nav-link">
-                            <i class="nav-icon fas fa-money-check-alt"></i>
-                            <p>Ventas</p>
-                        </a>
-                    </li>
                     <li class="nav-item">
                         <a href="{{ url('/todos/check') }}" class="nav-link">
                             <i class="nav-icon fas fa-tasks"></i>

@@ -41,7 +41,7 @@
                                     <th>Fecha</th>
                                     <th>Nombre</th>
                                     <th>Usuario</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Estado</th>
                                 </tr>
                             </thead>
@@ -50,7 +50,7 @@
                                     <th>Fecha</th>
                                     <th>Nombre</th>
                                     <th>Usuario</th>
-                                    <th>Sucursal</th>
+                                    <th>Inmueble</th>
                                     <th>Estado</th>
                                 </tr>
                             </tfoot>
