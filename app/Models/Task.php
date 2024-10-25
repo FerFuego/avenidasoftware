@@ -11,13 +11,27 @@ class Task extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'state',
+        'is_complete',
+        'due_date',
     ];
+
+    protected $with = ['users', 'sucursals', 'photos'];
 
     /**
      * Relationship
      */
-    public function todos () {
-        return $this->belongsToMany(Todo::class, 'tasks_todos');
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'task_id');
+    }
+
+    public function users() {
+        return $this->belongsToMany(User::class, 'users_tasks');
+    }
+
+    public function sucursals() {
+        return $this->belongsToMany(Sucursal::class, 'sucursals_todo_tasks');
     }
 }

@@ -66,7 +66,7 @@
                                 @foreach($notifications as $notification)
                                     <tr>
                                         <td>{{ $notification->id }}</td>
-                                        <td>{{ $notification->created_at->format('j/m/Y - H:i \h\s') }}</td>
+                                        <td>{{ $notification->created_at->format('j F, Y - H:i \h\s') }}</td>
                                         <td>{{ $notification->type }}</td>
                                         <td>{{ $notification->title }}</td>
                                         <td>{{ $notification->detail }}</td>

@@ -2,9 +2,9 @@
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
         <img src="../../img/logo-xs.webp"
-        alt="AdminLTE Logo"
-        class="brand-image img-circle elevation-3"
-        style="opacity: .8">
+            alt="AdminLTE Logo"
+            class="brand-image img-circle elevation-3"
+            style="opacity: .8">
         <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
     </a>
 
@@ -21,11 +21,9 @@
             </div>
         @endguest
 
-
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                    with font-awesome or any other icon font library -->
+                
                 @cannot('isOperario')    
                     {{-- Nothing --}}
                 @endcannot
@@ -59,31 +57,11 @@
                             <p>Notificaciones</p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview {{-- menu-open --}}">
-                        <a href="{{ url('/todos') }}" class="nav-link {{-- active --}}">
-                            <i class="nav-icon far fa-list-alt"></i>
-                            <p>Tareas <i class="fas fa-angle-left right"></i></p>
+                    <li class="nav-item">
+                        <a href="{{ url('/tasks') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tasks"></i>
+                            <p>Tareas</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ url('/todos') }}" class="nav-link {{-- active --}}">
-                                    <i class="fas fa-tasks nav-icon"></i>
-                                    <p>Ver las Listas de Tareas</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('/tasks') }}" class="nav-link">
-                                    <i class="fas fa-tasks nav-icon"></i>
-                                    <p>Ver todas las Tareas</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{ url('/todolists') }}" class="nav-link">
-                                    <i class="fas fa-tasks nav-icon"></i>
-                                    <p>Ver Tareas Realizadas</p>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                 @endcanany
 

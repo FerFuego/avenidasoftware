@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Task;
+use App\Models\Sucursal;
 use Illuminate\Http\Request;
 use App\Http\Requests\TaskRequest;
 
@@ -15,10 +17,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::orderBy('id', 'asc')->get();
-
+        // tasks with users
         return view('tasks.index', [
-            'tasks' => $tasks
+            'tasks' => Task::with('users')->get()
         ]);
     }
 
@@ -29,7 +30,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('tasks.create');
+        return view('tasks.create', [
+            'users' => User::orderBy('name', 'asc')->get(),
+            'sucursals' => Sucursal::orderBy('name', 'asc')->get()
+        ]);
     }
 
     /**
@@ -40,8 +44,20 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-        Task::create($request->all());
+        $task = Task::create($request->all());
 
+         // attach new users
+        foreach ($request->gerents as $user_id) {
+            $user = User::where('id', $user_id)->first();
+            $user->tasks()->attach($task->id);
+        }
+
+        // attach new sucursals
+        foreach ($request->sucursals as $sucursal_id) {
+            $sucursal = Sucursal::where('id', $sucursal_id)->first();
+            $sucursal->todo_tasks()->attach($task->id);
+        }
+        
         session()->flash('success', 'Tarea Creada Correctamente!');
 
         return redirect('/tasks');
@@ -69,6 +85,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         return view('tasks.edit', [
+            'users' => User::orderBy('name', 'asc')->get(),
+            'sucursals' => Sucursal::orderBy('name', 'asc')->get(),
             'task' => $task
         ]);
     }
@@ -84,10 +102,28 @@ class TaskController extends Controller
     {
         $task->fill($request->all())->update();
 
+        // detach all users and sucursals
+        $task->users()->detach();
+        $task->sucursals()->detach();
+
+        // attach new users
+        foreach ($request->gerents as $user_id) {
+            $user = User::where('id', $user_id)->first();
+            $user->tasks()->attach($task->id);
+        }
+
+        // attach new sucursals
+        foreach ($request->sucursals as $sucursal_id) {
+            $sucursal = Sucursal::where('id', $sucursal_id)->first();
+            $sucursal->todo_tasks()->attach($task->id);
+        }
+
         session()->flash('success','Tarea Actualizada Correctamente!');
 
         return view('tasks.edit', [
             'task' => $task,
+            'users' => User::orderBy('name', 'asc')->get(),
+            'sucursals' => Sucursal::orderBy('name', 'asc')->get()
         ]);
     }
 
@@ -99,7 +135,6 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $task->todos()->detach();
         $task->delete();
 
         session()->flash('success','Tarea Eliminada Correctamente!');

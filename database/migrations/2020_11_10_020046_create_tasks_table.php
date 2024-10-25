@@ -17,6 +17,9 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->string('state')->nullable();
+            $table->timestamp('due_date')->nullable();
+            $table->boolean('is_complete');
             $table->timestamps();
         });
     }

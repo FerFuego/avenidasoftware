@@ -5,6 +5,7 @@ use DB;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\Notification;
+use App\Models\Task;
 use App\Models\Todo;
 
 class HomeController extends Controller
@@ -30,7 +31,7 @@ class HomeController extends Controller
 
         $notifications = Notification::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
 
-        $todos = Todo::orderBy('id', 'asc')->get();
+        $todos = Task::orderBy('id', 'asc')->get();
         
         return view('home', [
             'sucursals' => $sucursals,

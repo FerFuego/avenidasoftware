@@ -70,14 +70,14 @@
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="{{ url('/roles/'. $role->id ) }}">
+                                        <td class="d-flex">
+                                            <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/roles/'. $role->id ) }}">
                                                 <i class="fas fa-folder"></i> Ver
                                             </a>
-                                            <a class="btn btn-info btn-sm" href="{{ url('/roles/'. $role->id .'/edit') }}">
+                                            <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/roles/'. $role->id .'/edit') }}">
                                                 <i class="fas fa-pencil-alt"></i> Editar
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#deleteRolModal" data-roleid="{{ $role->id }}">
+                                            <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteRolModal" data-roleid="{{ $role->id }}">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
                                         </td>

@@ -42,9 +42,10 @@ mix
         'resources/vendor/datatables-bs4/js/dataTables.bootstrap4.js',
         'resources/vendor/datatables-responsive/js/dataTables.responsive.js',
         'resources/vendor/datatables-responsive/js/responsive.bootstrap4.js',
-        'resources/js/custom-scripts.js'
+        'resources/js/custom-scripts.js',
     ], 'public/js/vendor.js')
-
+    // 'node_modules/dropzone/dist/dropzone-min.js',
+    
     .copy('resources/vendor/fontawesome-free-5.15.1-web/webfonts', 'public/webfonts')
 
     .copy('resources/img', 'public/img')

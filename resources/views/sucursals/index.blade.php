@@ -79,14 +79,14 @@
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-sm" href="{{ url('/sucursals/'. $sucursal->id ) }}">
+                                        <td class="d-flex">
+                                            <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/sucursals/'. $sucursal->id ) }}">
                                                 <i class="fas fa-folder"></i> Ver
                                             </a>
-                                            <a class="btn btn-info btn-sm" href="{{ url('/sucursals/'. $sucursal->id .'/edit') }}">
+                                            <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/sucursals/'. $sucursal->id .'/edit') }}">
                                                 <i class="fas fa-pencil-alt"></i> Editar
                                             </a>
-                                            <a class="btn btn-danger btn-sm" href="#" data-toggle="modal" data-target="#deleteSucursalsModal" data-sucursalid="{{ $sucursal->id }}">
+                                            <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteSucursalsModal" data-sucursalid="{{ $sucursal->id }}">
                                                 <i class="fas fa-trash"></i> Eliminar
                                             </a>
                                         </td>

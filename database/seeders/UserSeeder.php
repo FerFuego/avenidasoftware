@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserSeeder extends Seeder
 {
@@ -15,22 +14,53 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = new User();
-        $user->name = 'Admin';
-        $user->email = 'admin@test.com';
-        $user->email_verified_at = now();
-        $user->password = \Illuminate\Support\Facades\Hash::make('secret');
-        //$user->id_user_type = 1;
-        $user->status = '1';
-        $user->save();
 
-        $user = new User();        
-        $user->name = 'User';
-        $user->email = 'user@test.com';
-        $user->email_verified_at = now();
-        $user->password = \Illuminate\Support\Facades\Hash::make('secret');
-        //$user->id_user_type = 2;
-        $user->status = '1';
-        $user->save();
+        DB::table('users')->insert([
+            'name' => 'Superadmin',
+            'email' => 'secret@secret.com',
+            'password' => '$2y$10$/c5ZrHu5KCdyEBePZEcjae9SqO8eylz5R5MlLV5HUSeqmcBgrU4Hq',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'User',
+            'email' => 'user@test.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Fer Catalano',
+            'email' => 'ferc_vcp@hotmail.com',
+            'password' => '$2y$10$t/6DxA2CQwyO0DwqXxK4ZeaDrjFG9h1tEvvF9OvKPA58.Fijh1r.i',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Gerente',
+            'email' => 'gerente@secret.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Operario',
+            'email' => 'operario@secret.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Admin',
+            'email' => 'admin@secret.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
