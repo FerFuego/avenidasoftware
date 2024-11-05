@@ -1,0 +1,15 @@
+.todo-list > li.done, 
+.todo-list > li.complete {
+  color: #697582;
+}
+
+.todo-list > li.done .text, 
+.todo-list > li.complete .text {
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.todo-list > li.done .badge, 
+.todo-list > li.complete .badge {
+  background: #adb5bd !important;
+}

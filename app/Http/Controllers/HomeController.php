@@ -29,14 +29,14 @@ class HomeController extends Controller
     {
         $sucursals = auth()->user()->sucursals;
 
-        $notifications = Notification::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
+        $tasks = auth()->user()->tasks;
 
-        $todos = Task::orderBy('id', 'asc')->get();
+        $notifications = Notification::where('user_id', auth()->user()->id)->orderBy('id', 'desc')->get();
         
         return view('home', [
             'sucursals' => $sucursals,
             'notifications' => $notifications,
-            'todos' => $todos
+            'tasks' => $tasks
         ]);
     }
 

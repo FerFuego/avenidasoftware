@@ -65522,10 +65522,12 @@ document.addEventListener('DOMContentLoaded', () => {
         checkbox.addEventListener('change', function() {
             if (this.checked) {
                 this.parentElement.parentElement.classList.add("done");
+                this.parentElement.parentElement.classList.add("complete");
                 is_complete = 1;
                 state = 'Completada';
             } else {
                 this.parentElement.parentElement.classList.remove("done");
+                this.parentElement.parentElement.classList.remove("complete");
                 is_complete = 0;
                 state = 'Incompleta';
             }
@@ -65537,13 +65539,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         
             const ops = {
-                method: 'PATCH',
+                method: 'POST',
                 headers: {
                     'content-type': 'application/json',
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: JSON.stringify(attrs) ,
-                url: '/todolists/update'
+                url: '/tasks/check'
             };
     
             axios(ops).then(function (response) {
@@ -65587,13 +65589,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         
             const ops = {
-                method: 'PATCH',
+                method: 'POST',
                 headers: {
                     'content-type': 'application/json',
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                data: JSON.stringify(attrs) ,
-                url: '/todolists/update'
+                data: JSON.stringify(attrs),
+                url: '/tasks/check'
             };
     
             axios(ops).then(function (response) {

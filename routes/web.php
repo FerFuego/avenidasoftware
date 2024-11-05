@@ -32,7 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', 'RolesController')->middleware('can:isSuper');
     Route::resource('sucursals', 'SucursalController')->middleware('role:superadmin,admin');
     Route::resource('tasks', 'TaskController');
-    Route::get('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
+    Route::post('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
+    Route::post('tasks/complete', [App\Http\Controllers\TaskController::class,'complete']);
     Route::resource('notifications', 'NotificationController');
     Route::post('photos/store/{task}', [App\Http\Controllers\PhotoController::class, 'store']);
     Route::get('download/{file}', function ($file) {

@@ -28,4 +28,5 @@ class Sucursal extends Model
     public function todo_tasks () {
         return $this->belongsToMany(Task::class, 'sucursals_todo_tasks');
     }
+
 }

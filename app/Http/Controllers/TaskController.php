@@ -128,6 +128,21 @@ class TaskController extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TodoList  $todoList
+     * @return \Illuminate\Http\Response
+     */
+    public function check(Request $request, Task $task)
+    {
+        $t = Task::find($request->task_id);
+        $t->fill($request->only('state', 'is_complete'))->update();
+        
+        return response()->json( $request->all() ); 
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Task  $task

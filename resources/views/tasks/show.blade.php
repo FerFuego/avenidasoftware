@@ -11,7 +11,9 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('/') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="{{ url('/tasks') }}">Tareas</a></li>
+                    @canany(['isSuper','isAdmin','isEncargado'])
+                        <li class="breadcrumb-item"><a href="{{ url('/tasks') }}">Tareas</a></li>
+                    @endcan
                     <li class="breadcrumb-item active">Ver Tarea</li>
                 </ol>
             </div>
@@ -33,9 +35,9 @@
                             </div>
                             <div class="col-3 text-right">
                                 <h6><b>Estado:</b> 
-                                @if ($task->state == 'Completado')
+                                @if ($task->state == 'Completada')
                                     <span class="badge badge-success">{{ $task->state }}</span>
-                                @elseif ($task->state == 'Proceso')
+                                @elseif ($task->state == 'En Proceso')
                                     <span class="badge badge-warning">{{ $task->state }}</span>
                                 @else
                                     <span class="badge badge-danger">{{ $task->state }}</span>
