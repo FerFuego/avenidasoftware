@@ -42,7 +42,6 @@
                                     <th>Fecha</th>
                                     <th>Tipo</th>
                                     <th>Titulo</th>
-                                    <th>Detalle</th>
                                     <th>Usuario</th>
                                     <th>Inmueble</th>
                                     <th>Estado</th>
@@ -55,7 +54,6 @@
                                     <th>Fecha</th>
                                     <th>Tipo</th>
                                     <th>Titulo</th>
-                                    <th>Detalle</th>
                                     <th>Usuario</th>
                                     <th>Inmueble</th>
                                     <th>Estado</th>
@@ -69,7 +67,6 @@
                                         <td>{{ $notification->created_at->format('j F, Y - H:i \h\s') }}</td>
                                         <td>{{ $notification->type }}</td>
                                         <td>{{ $notification->title }}</td>
-                                        <td>{{ $notification->detail }}</td>
                                         <td>
                                             @if ( $notification->user )
                                                 <span class="badge badge-info">
@@ -91,9 +88,11 @@
                                                 Leida
                                             @endif
                                         <td>
-                                            <a class="btn btn-primary btn-sm js-read" href="#" data-notificationid="{{ $notification->id }}">
-                                                <i class="fas fa-check mr-1"></i> Leida
-                                            </a>
+                                            @if ( $notification->state == 0 )   
+                                                <a class="btn btn-primary btn-sm js-read" href="#" data-notificationid="{{ $notification->id }}">
+                                                    <i class="fas fa-check mr-1"></i> Leida
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

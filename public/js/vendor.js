@@ -65467,6 +65467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             axios(ops).then(function (response) {
                 $('#js-read-'+id).html('Leida');
+                $(cta).addClass('d-none');
             })
 
             .catch(function (error) {
