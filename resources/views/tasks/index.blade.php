@@ -88,16 +88,18 @@
                                                 <span class="badge badge-danger">{{ $task->state }}</span>
                                             @endif
                                         </td>
-                                        <td class="d-flex">
-                                            <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/tasks/'. $task->id ) }}">
-                                                <i class="fas fa-eye"></i> Ver
-                                            </a>
-                                            <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/tasks/'. $task->id .'/edit') }}">
-                                                <i class="fas fa-pencil-alt"></i> Editar
-                                            </a>
-                                            <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteTaskModal" data-taskid="{{ $task->id }}">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </a>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/tasks/'. $task->id ) }}">
+                                                    <i class="fas fa-eye"></i> Ver
+                                                </a>
+                                                <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/tasks/'. $task->id .'/edit') }}">
+                                                    <i class="fas fa-pencil-alt"></i> Editar
+                                                </a>
+                                                <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteTaskModal" data-taskid="{{ $task->id }}">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

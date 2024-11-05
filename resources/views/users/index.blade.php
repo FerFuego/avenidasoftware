@@ -84,13 +84,15 @@
                                                 @endforeach
                                             @endif
                                         </td>
-                                        <td class="d-flex">
-                                            <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/users/'. $user->id .'/edit') }}">
-                                                <i class="fas fa-pencil-alt"></i> Editar
-                                            </a>
-                                            <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteModal" data-userid="{{ $user->id }}">
-                                                <i class="fas fa-trash"></i> Eliminar
-                                            </a>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/users/'. $user->id .'/edit') }}">
+                                                    <i class="fas fa-pencil-alt"></i> Editar
+                                                </a>
+                                                <a class="btn btn-danger btn-sm align-self-center" href="#" data-toggle="modal" data-target="#deleteModal" data-userid="{{ $user->id }}">
+                                                    <i class="fas fa-trash"></i> Eliminar
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
