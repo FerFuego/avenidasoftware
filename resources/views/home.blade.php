@@ -96,24 +96,26 @@
 							<div class="card-body">
 								<ul class="todo-list ui-sortable" data-widget="todo-list">
 									@foreach( $tasks as $k => $task )
-										<li class="{{ $task->is_complete ? 'done complete' : '' }}">
-											<span class="handle">
-												<i class="fas fa-ellipsis-v"></i>
-												<i class="fas fa-ellipsis-v"></i>
-											</span>
-											<div class="icheck-primary d-inline ml-2">
-												<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
-												<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
-											</div>
-											<span class="text">{{ $task->title }}</span>
-											<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
-											<a class="tools" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
-												<i class="fas fa-edit" title="Subir Evidencia"></i>
-											</a>
-											<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
-												<i class="fas fa-clock" title="En Proceso"></i>
-											</div>
-										</li>
+										@if($task->sucursals[0]->id == $sucursal->id)
+											<li class="{{ $task->is_complete ? 'done complete' : '' }}">
+												<span class="handle">
+													<i class="fas fa-ellipsis-v"></i>
+													<i class="fas fa-ellipsis-v"></i>
+												</span>
+												<div class="icheck-primary d-inline ml-2">
+													<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
+													<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
+												</div>
+												<span class="text">{{ $task->title }}</span>
+												<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
+												<a class="tools" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
+													<i class="fas fa-edit" title="Subir Evidencia"></i>
+												</a>
+												<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
+													<i class="fas fa-clock" title="En Proceso"></i>
+												</div>
+											</li>
+										@endif
 									@endforeach
 								</ul>
 							</div>

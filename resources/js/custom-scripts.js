@@ -480,3 +480,17 @@ $(document).ready(function () {
         $("#rta_year").val(value);
     });
 });
+
+/**
+ * Toggle menu
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    let cta = document.querySelector('.toggle-menu'); //toggle-menu
+
+    cta.addEventListener('click', function() {
+        let body = document.querySelector('body');
+        body.classList.toggle('sidebar-closed');
+        body.classList.toggle('sidebar-collapse');
+        body.classList.toggle('sidebar-open');
+    });
+});
