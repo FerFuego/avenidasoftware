@@ -90,7 +90,7 @@ $(document).ready(function () {
             $.each(data, function(index, element){
                 $(permissions_checkbox_list).append(
                     '<div class="custom-control custom-checkbox">' +
-                    '<input type="checkbox" name="permissions[]" class="custom-control-input" id="'+ element.slug +'" value="' + element.id + '">' +
+                    '<input type="checkbox" name="permissions[]" class="custom-control-input" id="'+ element.slug +'" value="' + element.id + '" checked>' +
                     '<label for="'+ element.slug +'" class="custom-control-label">' + element.name + '</label>' +
                     '</div>'
                 )

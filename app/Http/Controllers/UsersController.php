@@ -39,7 +39,7 @@ class UsersController extends Controller
             return $permissions;
         }
 
-        $roles = Role::all();
+        $roles = Role::where('slug', '!=', 'superadmin')->get();
         
         return view('users.create',[
             'roles' => $roles
@@ -90,7 +90,7 @@ class UsersController extends Controller
      */
     public function edit(User $user, Request $request)
     {
-        $roles = Role::all();
+        $roles = Role::where('slug', '!=', 'superadmin')->get();
         $userRole = $user->roles->first();
         $allPermissions = $userRole->permissions ?? [];
         

@@ -74,7 +74,7 @@
 						@endforeach
 					</select>
 				</div>
-				<div id="permissions_box">
+				<div class="d-none" id="permissions_box">
 					<label for="roles">Seleccione los Permisos</label>
 					<div id="permissions_checkbox_list"></div>
 				</div>

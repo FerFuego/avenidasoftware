@@ -9,6 +9,9 @@ php artisan schedule:work
 OBSERVERS
 php artisan make:observer TodoListObserver -model=TodoList
 
+COMPILAR CSS Y JS
+> npm run dev
 
-admin: secret@secret.com => la alarma
-operaro: operario@secret.com => la del pulpo
+
+superadmin: secret@secret.com
+operaro: operario@secret.com

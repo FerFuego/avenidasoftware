@@ -55,7 +55,7 @@
 						</div>
 						<div class="form-group">
 							<label for="password">Contraseña</label>
-							<input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" minlength="8">
+							<input type="password" name="password" id="password" class="form-control" placeholder="**********" minlength="8">
 							@error('password')
 									<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
@@ -64,7 +64,7 @@
 						</div>
 						<div class="form-group">
 							<label for="password_confirmation">Confirmar Contraseña</label>
-							<input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="Confirmar Contraseña">
+							<input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="**********">
 						</div>
 						<div class="form-group">
 							<label for="role">Rol</label>
@@ -82,7 +82,7 @@
 								@endforeach
 							</select>
 						</div>
-						<div id="permissions_box">
+						<div class="d-none" id="permissions_box">
 							<label for="roles">Seleccione los Permisos</label>
 							<div id="permissions_checkbox_list">
 								@foreach ( $allPermissions as $permission ) 
