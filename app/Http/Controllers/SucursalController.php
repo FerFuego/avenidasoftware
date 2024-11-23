@@ -72,6 +72,16 @@ class SucursalController extends Controller
         ]);
     }
 
+
+    public function get(User $user) {
+        
+        $sucursals = Sucursal::whereHas('users', function ($query) use ($user) { $query->where('id', $user->id); })->get();
+
+        return view('sucursals.index', [
+            'sucursals' => $sucursals
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

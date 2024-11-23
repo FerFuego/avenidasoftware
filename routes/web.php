@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController')->middleware('role:superadmin,admin,gerente');
     Route::resource('roles', 'RolesController')->middleware('can:isSuper');
     Route::resource('sucursals', 'SucursalController')->middleware('role:superadmin,admin,gerente');
+    Route::get('sucursal/user/{user}', [App\Http\Controllers\SucursalController::class, 'get']);
     Route::resource('tasks', 'TaskController');
     Route::post('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
     Route::post('tasks/complete', [App\Http\Controllers\TaskController::class,'complete']);

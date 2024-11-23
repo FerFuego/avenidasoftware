@@ -96,6 +96,11 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
+                                                @if ($user->hasRole('cliente'))
+                                                    <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/sucursal/user/'. $user->id) }}">
+                                                        <i class="fas fa-home"></i> Ver
+                                                    </a>
+                                                @endif
                                                 <a class="btn btn-info btn-sm align-self-center mr-2" href="{{ url('/users/'. $user->id .'/edit') }}">
                                                     <i class="fas fa-pencil-alt"></i> Editar
                                                 </a>
