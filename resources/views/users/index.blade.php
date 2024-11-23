@@ -34,7 +34,17 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <a href="{{ route('users.create') }}" class="btn btn-info mb-2"><i class="fas fa-plus"></i> Agregar Nuevo Usuario</a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="{{ route('users.create') }}" class="btn btn-info mb-2"><i class="fas fa-plus"></i> Agregar Nuevo Usuario</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{ route('users.index', ['filter' => 'gerente-operario']) }}" class="btn btn-primary ml-2 float-right"><i class="fas fa-users-cog"></i> Ver Empleados</a>
+                            <a href="{{ route('users.index', ['filter' => 'cliente']) }}" class="btn btn-primary ml-2 float-right"><i class="fas fa-users"></i> Ver Clientes</a>
+                            <a href="{{ route('users.index', ['filter' => 'all']) }}" class="btn btn-primary ml-2 float-right">Todos</a>
+                            <label class="float-right mb-0 mt-2">Filtros:</label>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped" id="tableUsers" width="100%" cellspacing="0">
                             <thead>

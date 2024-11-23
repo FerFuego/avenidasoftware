@@ -16,9 +16,23 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'asc')->get();
+        $query = User::query();
+        $filter = $request->filter ? explode('-', $request->filter) : null;
+
+        if ( !$filter || $filter[0] === 'all' ) {
+            $users = $query->orderBy('id', 'asc')->get();
+        } else {
+            $users = $query->whereHas('roles', function ($query) use ($filter) {
+                    $query->where('slug', $filter[0]);
+                    if (isset($filter[1])) {
+                        $query->orWhere('slug', $filter[1]);
+                    }
+                })
+                ->orderBy('id', 'asc')
+                ->get();
+        }
 
         return view('users.index', [
             'users' => $users
