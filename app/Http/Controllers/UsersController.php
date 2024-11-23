@@ -92,7 +92,7 @@ class UsersController extends Controller
     {
         $roles = Role::all();
         $userRole = $user->roles->first();
-        $allPermissions = $userRole->permissions;
+        $allPermissions = $userRole->permissions ?? [];
         
         return view('users.edit', [
             'user' => $user,

@@ -8,3 +8,7 @@ php artisan schedule:work
 
 OBSERVERS
 php artisan make:observer TodoListObserver -model=TodoList
+
+
+admin: secret@secret.com => la alarma
+operaro: operario@secret.com => la del pulpo
