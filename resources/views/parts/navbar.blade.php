@@ -10,7 +10,7 @@
     </ul>
     
     <ul class="navbar-nav ml-auto">
-        @canany(['isSuper','isAdmin'])
+        @canany(['isSuper','isAdmin','isGerente'])
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>

@@ -28,9 +28,9 @@ Route::get('forgot/{token}', 'Auth\ResetPasswordController@showResetForm');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::resource('users', 'UsersController')->middleware('role:superadmin,admin');
+    Route::resource('users', 'UsersController')->middleware('role:superadmin,admin,gerente');
     Route::resource('roles', 'RolesController')->middleware('can:isSuper');
-    Route::resource('sucursals', 'SucursalController')->middleware('role:superadmin,admin');
+    Route::resource('sucursals', 'SucursalController')->middleware('role:superadmin,admin,gerente');
     Route::resource('tasks', 'TaskController');
     Route::post('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
     Route::post('tasks/complete', [App\Http\Controllers\TaskController::class,'complete']);

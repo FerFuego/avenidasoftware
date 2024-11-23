@@ -37,7 +37,7 @@
                     </li>
                 @endcan
 
-                @canany(['isSuper','isAdmin'])
+                @canany(['isSuper','isAdmin','isGerente'])
                     <li class="nav-item">
                         <a href="{{ url('/users') }}" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
