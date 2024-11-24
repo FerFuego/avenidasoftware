@@ -49423,7 +49423,8 @@ if (typeof jQuery === 'undefined') {
 				 */
 				$.ajax( {
 					dataType: 'json',
-					url: oLanguage.sUrl,
+					// url: oLanguage.sUrl,
+					url: 'https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json',
 					success: function ( json ) {
 						_fnLanguageCompat( json );
 						_fnCamelToHungarian( defaults.oLanguage, json );
@@ -65485,6 +65486,9 @@ $('#select_gerent').selectpicker();
 $("#tableSucursals, #tableSales, #tableRoles, #tableUsers").DataTable({
     "responsive": true,
     "autoWidth": false,
+    "language": {
+        url: 'https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json',
+    },
 });
 
 //Calendar
@@ -65615,6 +65619,43 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         })
     })
+})
+
+//Todo change state
+document.addEventListener('DOMContentLoaded', () => {
+
+    var ctas = document.querySelector(".todo-state-changer");
+    if (ctas) {
+        ctas.addEventListener('change', function() {
+
+            var is_complete = (this.getAttribute('value') == 'Completada') ? 1 : 0;
+            var attrs = {
+                'task_id' : this.getAttribute('data-id'),
+                'state'   : this.value,
+                'is_complete' : is_complete
+            }
+
+            console.log(attrs);
+        
+            const ops = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: JSON.stringify(attrs),
+                url: '/tasks/change-state'
+            };
+    
+            axios(ops).then(function (response) {
+                window.location.reload();
+            })
+    
+            .catch(function (error) {
+                console.log(error);
+            })
+        })
+    }
 })
 
 // jQuery UI sortable for the todo list

@@ -35,7 +35,7 @@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ url()->previous() }}" class="btn btn-primary">Volver</a>
+                  <a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
                 </div>
             </div>
         </div>

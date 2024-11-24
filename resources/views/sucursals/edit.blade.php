@@ -63,15 +63,6 @@
 					@enderror
                 </div>
                 <div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ $sucursal->email }}"  required>
-					@error('email')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-                </div>
-                <div class="form-group">
 					<label for="schedule">Horario</label>
 					<input type="schedule" name="schedule" id="schedule" class="form-control" placeholder="Abierto de 08:00 a 20:00hs" value="{{ $sucursal->schedule }}"  required>
 					@error('schedule')
@@ -82,7 +73,8 @@
                 </div>
                 <div class="form-group">
 					<label for="gerents">Asignado</label>
-					<select name="gerents[]" id="select_gerent" class="form-control selectpicker" multiple data-live-search="true">
+					<!-- <select name="gerents[]" id="select_gerent" class="form-control selectpicker" multiple data-live-search="true"> -->
+					<select name="gerents[]" id="select_gerent" class="form-control selectpicker" data-live-search="true">
 						<option>Seleccione Asignado</option>
 						@foreach ( $users as $user )
 							<option value="{{ $user->id }}" {{ in_array( $user->id, $sucursal->users->pluck('id')->toArray() ) ? 'selected' : '' }}>{{ $user->name }}</option>
@@ -99,7 +91,7 @@
 	</div>
 	<div class="row">
 	  <div class="col-12">
-		<a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
+	  	<a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
 	  </div>
 	</div>
   </section>

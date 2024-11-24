@@ -17,7 +17,7 @@ class SucursalController extends Controller
      */
     public function index()
     {
-        $sucursals = Sucursal::orderBy('id', 'asc')->get();
+        $sucursals = Sucursal::with('users')->orderBy('id', 'asc')->get();
 
         return view('sucursals.index', [
             'sucursals' => $sucursals
@@ -35,7 +35,9 @@ class SucursalController extends Controller
             Abort(403);
         } */
 
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::whereHas('roles', function ($query) { 
+            $query->where('slug', 'cliente'); 
+        })->orderBy('name', 'asc')->get();
 
         return view('sucursals.create', [
             'users' => $users
@@ -75,7 +77,9 @@ class SucursalController extends Controller
 
     public function get(User $user) {
         
-        $sucursals = Sucursal::whereHas('users', function ($query) use ($user) { $query->where('id', $user->id); })->get();
+        $sucursals = Sucursal::whereHas('users', function ($query) use ($user) { 
+            $query->where('id', $user->id); 
+        })->get();
 
         return view('sucursals.index', [
             'sucursals' => $sucursals
@@ -90,7 +94,9 @@ class SucursalController extends Controller
      */
     public function edit(Sucursal $sucursal)
     {
-        $users = User::orderBy('name', 'asc')->get();
+        $users = User::whereHas('roles', function ($query) { 
+            $query->where('slug', 'cliente'); }
+        )->orderBy('name', 'asc')->get();
 
         return view('sucursals.edit', [
             'sucursal' => $sucursal,

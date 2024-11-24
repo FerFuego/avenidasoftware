@@ -15,11 +15,47 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        // tasks with users
+        // Tasks
+        $tasks = Task::with('users');
+
+        if ($request->all() && $request->state != 'all') {
+            $tasks = $tasks->where('state', $request->state);
+        } else {
+            $tasks = $tasks->where('state', '!=', 'Completado');
+        }
+
+        if ($request->all()) {
+            $tasks = $tasks->whereHas('sucursals', function ($query) use ($request) {
+
+                if ($request->sucursal != 'all') {
+                    $query->where('id', $request->sucursal);
+                }
+       
+                if ($request->all() && $request->client != 'all') {
+                    $query->whereHas('users', function ($query) use ($request) {
+                        $query->where('id', $request->client);
+                    });
+                }
+            });
+        }
+
+
+        $tasks = $tasks->orderBy('created_at', 'desc')->get();
+                
+        // Clients
+        $clients = User::whereHas('roles', function ($query) {
+            $query->where('slug', 'cliente');
+        })->get();
+
+        // Sucursals
+        $sucursals = Sucursal::orderBy('name', 'asc')->get();
+
         return view('tasks.index', [
-            'tasks' => Task::with('users')->get()
+            'tasks' => $tasks,
+            'clients' => $clients,
+            'sucursals' => $sucursals
         ]);
     }
 
@@ -30,9 +66,15 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $users = User::whereHas('roles', function ($query) { 
+            $query->where('slug', 'operario'); 
+        })->orderBy('name', 'asc')->get();
+        
+        $sucursals = Sucursal::orderBy('name', 'asc')->get();
+
         return view('tasks.create', [
-            'users' => User::orderBy('name', 'asc')->get(),
-            'sucursals' => Sucursal::orderBy('name', 'asc')->get()
+            'users' => $users,
+            'sucursals' => $sucursals
         ]);
     }
 
@@ -135,6 +177,21 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function check(Request $request, Task $task)
+    {
+        $t = Task::find($request->task_id);
+        $t->fill($request->only('state', 'is_complete'))->update();
+        
+        return response()->json( $request->all() ); 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TodoList  $todoList
+     * @return \Illuminate\Http\Response
+     */
+    public function change_state(Request $request, Task $task)
     {
         $t = Task::find($request->task_id);
         $t->fill($request->only('state', 'is_complete'))->update();

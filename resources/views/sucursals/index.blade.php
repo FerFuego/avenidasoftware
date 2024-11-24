@@ -26,12 +26,6 @@
                 <div class="card-header">
                     <i class="fas fa-store"></i>
                     Inmuebles
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                          <i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                          <i class="fas fa-times"></i></button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <a href="{{ route('sucursals.create') }}" class="btn btn-info mb-2"><i class="fas fa-plus"></i> Agregar nuevo Inmueble</a>
@@ -40,24 +34,22 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Cliente</th>
                                     <th>Nombre</th>
                                     <th>Direccion</th>
                                     <th>Telefono</th>
-                                    <th>Email</th>
                                     <th>Horario</th>
-                                    <th>Asignados</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Cliente</th>
                                     <th>Nombre</th>
                                     <th>Direccion</th>
                                     <th>Telefono</th>
-                                    <th>Email</th>
                                     <th>Horario</th>
-                                    <th>Asignados</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -65,20 +57,17 @@
                                 @foreach($sucursals as $sucursal)
                                     <tr>
                                         <td>{{ $sucursal->id }}</td>
+                                        <td>
+                                            @if ( $sucursal->users->isNotEmpty() )
+                                                <span class="badge badge-success">
+                                                    {{ $sucursal->users->first()->name }} 
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td>{{ $sucursal->name }}</td>
                                         <td>{{ $sucursal->address }}</td>
                                         <td>{{ $sucursal->phone }}</td>
-                                        <td>{{ $sucursal->email }}</td>
                                         <td>{{ $sucursal->schedule }}</td>
-                                        <td>
-                                            @if ( $sucursal->users->isNotEmpty() )
-                                                @foreach ( $sucursal->users as $user ) 
-                                                    <span class="badge badge-success">
-                                                        {{ $user->name }} 
-                                                    </span>
-                                                @endforeach
-                                            @endif
-                                        </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/sucursals/'. $sucursal->id ) }}">

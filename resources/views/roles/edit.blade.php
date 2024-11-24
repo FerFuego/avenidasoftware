@@ -67,7 +67,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
       </div>
     </div>
   </section>

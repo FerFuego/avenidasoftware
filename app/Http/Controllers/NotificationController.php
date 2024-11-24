@@ -12,13 +12,26 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        if (auth()->user()->roles->first()->slug == "superadmin" || auth()->user()->roles->first()->slug == "admin") {
-            $notifications = Notification::orderBy('id', 'asc')->get();
+        $query = Notification::query();
+        
+        if ( $request->filter == 'all' ) {
+            $query->orderBy('created_at', 'desc');
         } else {
-            $notifications = Notification::where('user_id', auth()->user()->id)->orderBy('id', 'asc')->get();
+            // Admins
+            if (auth()->user()->roles->first()->slug == "superadmin" || auth()->user()->roles->first()->slug == "admin") {
+                $query->where('state', '0')
+                    ->orderBy('created_at', 'desc');
+            } else {
+                // Operario
+                $query->where('user_id', auth()->user()->id)
+                    ->where('state', '0')
+                    ->orderBy('created_at', 'desc');
+            }
         }
+
+        $notifications = $query->get();
 
         return view('notifications/index', [
             'notifications' => $notifications

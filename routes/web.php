@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('sucursal/user/{user}', [App\Http\Controllers\SucursalController::class, 'get']);
     Route::resource('tasks', 'TaskController');
     Route::post('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
+    Route::post('tasks/change-state', [App\Http\Controllers\TaskController::class,'change_state']);
     Route::post('tasks/complete', [App\Http\Controllers\TaskController::class,'complete']);
     Route::resource('notifications', 'NotificationController');
     Route::post('photos/store/{task}', [App\Http\Controllers\PhotoController::class, 'store']);

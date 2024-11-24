@@ -34,21 +34,34 @@
                                 <h6><b>Fecha de entrega:</b> {{ $task->due_date }}</b></h6>
                             </div>
                             <div class="col-3 text-right">
-                                <h6><b>Estado:</b> 
-                                @if ($task->state == 'Completada')
-                                    <span class="badge badge-success">{{ $task->state }}</span>
-                                @elseif ($task->state == 'En Proceso')
-                                    <span class="badge badge-warning">{{ $task->state }}</span>
-                                @else
-                                    <span class="badge badge-danger">{{ $task->state }}</span>
-                                @endif
-                            </h6>
+                                <h6>
+                                    <b>Estado:</b> 
+                                    @if ($task->state == 'Completada')
+                                        <span class="badge badge-success">{{ $task->state }}</span>
+                                    @elseif ($task->state == 'En Proceso')
+                                        <span class="badge badge-warning">{{ $task->state }}</span>
+                                    @else
+                                        <span class="badge badge-danger">{{ $task->state }}</span>
+                                    @endif
+                                </h6>
                                 <h6>
                                     <b>Asignado a:</b>
                                     @foreach($task->users as $user)
                                         <span class="badge badge-success">{{ $user->name }} </span>
                                     @endforeach
                                 </h6>
+                                @canany(['isSuper','isAdmin','isGerente','isOperario'])
+                                <h6>
+                                    <b>Cambiar estado:</b> 
+                                    <select name="state" id="state" data-id="{{ $task->id }}" class="form-control todo-state-changer">
+                                        <option value="Pendiente" {{ $task->state == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                        <option value="Cancelada" {{ $task->state == 'Cancelada' ? 'selected' : '' }}>Cancelada</option>
+                                        <option value="Completada" {{ $task->state == 'Completada' ? 'selected' : '' }}>Completada</option>
+                                        <option value="En Proceso" {{ $task->state == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
+                                        <option value="Incompleta" {{ $task->state == 'Incompleta' ? 'selected' : '' }}>Incompleta</option>
+                                    </select>
+                                </h6>
+                                @endcan
                             </div>
                         </div>
                     </div>
@@ -65,7 +78,7 @@
                         <p>{!! nl2br($task->description) !!}</p>
                     </div>
                     <div class="card-footer row">
-                        @can('isOperario')
+                        @canany(['isSuper','isAdmin','isGerente','isOperario'])
                             <div class="col-12 mb-5">
                                 <h6><b>Subir evidencia del trabajo realizado</b></h6>
                                 <form class="dropzone" id="dropzone-mulitple" action="{{ url('photos/store/'.$task->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
@@ -119,7 +132,7 @@
                                     })
                                 </script>
                             </div>
-                        @endcan
+                        @endcanany
                         <div class="col-12">
                             <h6><b>Evidencia del trabajo realizado</b></h6>
                             <div class="row">
@@ -137,7 +150,7 @@
             </div>
             <!-- /.col -->
             <div class="col-12 mb-3 text-right">
-                <a href="{{ url()->previous() }}" class="btn btn-primary">Volver</a>
+                <a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
             </div>
             <!-- /.col -->
         </div>

@@ -26,78 +26,78 @@
                 <div class="card-header">
                     <i class="fas fa-bell"></i>
                     Notificaciones
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                          <i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                          <i class="fas fa-times"></i></button>
-                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped" id="tableSucursals" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Fecha</th>
-                                    <th>Tipo</th>
-                                    <th>Titulo</th>
-                                    <th>Usuario</th>
-                                    <th>Inmueble</th>
-                                    <th>Estado</th>
-                                    <td>Acciones</td>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Fecha</th>
-                                    <th>Tipo</th>
-                                    <th>Titulo</th>
-                                    <th>Usuario</th>
-                                    <th>Inmueble</th>
-                                    <th>Estado</th>
-                                    <td>Acciones</td>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                @foreach($notifications as $notification)
+                    <div class="row p-0">
+                        <div class="col-md-6 p-0">{{-- Actions ---}}</div>
+                        <div class="col-md-6 p-0 mb-2">
+                            <a href="{{ route('notifications.index', ['filter' => 'all']) }}" class="btn btn-primary ml-2 float-right">Mostrar Todos</a>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="tableSucursals" width="100%" cellspacing="0">
+                                <thead>
                                     <tr>
-                                        <td>{{ $notification->id }}</td>
-                                        <td>{{ $notification->created_at->format('j F, Y - H:i \h\s') }}</td>
-                                        <td>{{ $notification->type }}</td>
-                                        <td>{{ $notification->title }}</td>
-                                        <td>
-                                            @if ( $notification->user )
-                                                <span class="badge badge-info">
-                                                    {{ $notification->user['name'] }} 
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ( $notification->sucursal )
-                                                <span class="badge badge-info">
-                                                    {{ $notification->sucursal['name'] }} 
-                                                </span>
-                                            @endif
-                                        </td>
-                                        <td id="js-read-{{$notification->id}}">
-                                            @if ( $notification->state == 0 )
-                                                <span class="badge badge-success">Nueva</span>
-                                            @else
-                                                Leida
-                                            @endif
-                                        <td>
-                                            @if ( $notification->state == 0 )   
-                                                <a class="btn btn-primary btn-sm js-read" href="#" data-notificationid="{{ $notification->id }}">
-                                                    <i class="fas fa-check mr-1"></i> Leida
-                                                </a>
-                                            @endif
-                                        </td>
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Tipo</th>
+                                        <th>Titulo</th>
+                                        <th>Usuario</th>
+                                        <th>Inmueble</th>
+                                        <th>Estado</th>
+                                        <td>Acciones</td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Fecha</th>
+                                        <th>Tipo</th>
+                                        <th>Titulo</th>
+                                        <th>Usuario</th>
+                                        <th>Inmueble</th>
+                                        <th>Estado</th>
+                                        <td>Acciones</td>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @foreach($notifications as $notification)
+                                        <tr>
+                                            <td>{{ $notification->id }}</td>
+                                            <td>{{ $notification->created_at->format('j F, Y - H:i \h\s') }}</td>
+                                            <td>{{ $notification->type }}</td>
+                                            <td>{{ $notification->title }}</td>
+                                            <td>
+                                                @if ( $notification->user )
+                                                    <span class="badge badge-info">
+                                                        {{ $notification->user['name'] }} 
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ( $notification->sucursal )
+                                                    <span class="badge badge-info">
+                                                        {{ $notification->sucursal['name'] }} 
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td id="js-read-{{$notification->id}}">
+                                                @if ( $notification->state == 0 )
+                                                    <span class="badge badge-success">Nueva</span>
+                                                @else
+                                                    Leida
+                                                @endif
+                                            <td>
+                                                @if ( $notification->state == 0 )   
+                                                    <a class="btn btn-primary btn-sm js-read" href="#" data-notificationid="{{ $notification->id }}">
+                                                        <i class="fas fa-check mr-1"></i> Leida
+                                                    </a>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

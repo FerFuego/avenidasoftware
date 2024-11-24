@@ -1083,7 +1083,8 @@
 				 */
 				$.ajax( {
 					dataType: 'json',
-					url: oLanguage.sUrl,
+					// url: oLanguage.sUrl,
+					url: 'https://cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json',
 					success: function ( json ) {
 						_fnLanguageCompat( json );
 						_fnCamelToHungarian( defaults.oLanguage, json );

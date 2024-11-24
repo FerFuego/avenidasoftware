@@ -33,6 +33,38 @@
 				<div class="card-body">
 					<form action="{{ route('tasks.store') }}" method="POST">
 						{{ csrf_field() }}
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">Inmueble</label>
+									<select name="sucursals[]" id="select_inmueble" class="form-control selectpicker" data-live-search="true" required>
+										@foreach ( $sucursals as $sucursal )
+										<option value="{{ $sucursal->id }}">{{ $sucursal->name }}</option>
+										@endforeach
+									</select>
+									@error('text')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+									@enderror
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="name">Responsable</label>
+									<select name="gerents[]" id="select_gerent" class="form-control selectpicker" data-live-search="true" required>
+										@foreach ( $users as $user )
+										<option value="{{ $user->id }}">{{ $user->name }}</option>
+										@endforeach
+									</select>
+									@error('text')
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $message }}</strong>
+									</span>
+									@enderror
+								</div>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="title">Tarea a realizar</label>
 							<input type="text" name="title" id="title" class="form-control" placeholder="Ej: Abrir a horario" value="{{ old('title') }}" required>
@@ -54,39 +86,8 @@
 									@enderror
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="name">Responsable/s</label>
-									<select name="gerents[]" id="select_gerent" class="form-control selectpicker" multiple data-live-search="true" required>
-										@foreach ( $users as $user )
-										<option value="{{ $user->id }}">{{ $user->name }}</option>
-										@endforeach
-									</select>
-									@error('text')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-									@enderror
-								</div>
-							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="name">Inmueble</label>
-									<select name="sucursals[]" id="select_inmueble" class="form-control selectpicker" multiple data-live-search="true" required>
-										@foreach ( $sucursals as $sucursal )
-										<option value="{{ $sucursal->id }}">{{ $sucursal->name }}</option>
-										@endforeach
-									</select>
-									@error('text')
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $message }}</strong>
-									</span>
-									@enderror
-								</div>
-							</div>
-						</div>
+						
 						<div class="form-group">
 							<label>Detalle de la tarea (Opcional)</label>
 							<textarea name="description" class="form-control" rows="10" placeholder="Detalle de la tarea">{{ old('description') }}</textarea>
@@ -104,7 +105,7 @@
 	</div>
 	<div class="row">
 		<div class="col-12">
-			<a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
+			<a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
 		</div>
 	</div>
 </section>

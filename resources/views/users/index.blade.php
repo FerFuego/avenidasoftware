@@ -26,12 +26,6 @@
                 <div class="card-header">
                     <i class="fas fa-users"></i>
                     Usuarios
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                          <i class="fas fa-minus"></i></button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
-                          <i class="fas fa-times"></i></button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -52,8 +46,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Rol</th>
-                                    <th>Permisos</th>
+                                    <th>Tipo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -62,8 +55,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
-                                    <th>Rol</th>
-                                    <th>Permisos</th>
+                                    <th>Tipo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
@@ -86,16 +78,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ( $user->permissions->isNotEmpty() )
-                                                @foreach ( $user->permissions as $permission ) 
-                                                    <span class="badge badge-success">
-                                                        {{ $permission->name }} 
-                                                    </span>
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-center">
+                                            <div class="d-flex justify-content-end">
                                                 @if ($user->hasRole('cliente'))
                                                     <a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/sucursal/user/'. $user->id) }}">
                                                         <i class="fas fa-home"></i> Ver

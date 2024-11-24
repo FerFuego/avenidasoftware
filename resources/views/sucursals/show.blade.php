@@ -30,7 +30,6 @@
 						</div>
 						<div class="card-body">
 							<h5><b>Telefono:</b> {{ $sucursal->phone }}</h5>
-							<h5><b>Email:</b> {{ $sucursal->email }}</h5>
 							<h5><b>Horarios:</b> {{ $sucursal->schedule }}</h5>
 							<h5><b>Gerentes:<b>
 								@if ( $sucursal->users->isNotEmpty() )
@@ -43,7 +42,7 @@
 							</h5>
 						</div>
 						<div class="card-footer">
-								<a href="{{ url()->previous() }}" class="btn btn-primary">Volver</a>
+							<a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
 						</div>
 					</div>
 				</div>

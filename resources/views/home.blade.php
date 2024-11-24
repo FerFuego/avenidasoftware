@@ -23,68 +23,155 @@
 
 	<div class="container-fluid">
 		<div class="row">
-			{{-- <div class="col-lg-3 col-6">
-					<div class="small-box bg-info">
+			@canany(['isSuper','isAdmin','isGerente'])
+				<div class="col-lg-3 col-6">
+					<div class="small-box bg-success">
 						<div class="inner">
-							<h3>100</h3>
+							<h3>{{ $clients }}</h3>
 							<p>Total Clientes</p>
 						</div>
 						<div class="icon">
 							<i class="ion ion-ios-people"></i>
 						</div>
-						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="{{ route('users.index', ['filter' => 'cliente']) }}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
-				</div> --}}
+				</div>
 
-			{{-- <div class="col-lg-3 col-6">
-					<div class="small-box bg-success">
-						<div class="inner">                        
-							<h3><sup style="font-size: 20px">$</sup>000</h3>
-							<p>Total Ventas</p>
-						</div>
-						<div class="icon">
-							<i class="ion ion-stats-bars"></i>
-						</div>
-						<a href="#" class="small-box-footer">Mas Info <i class="fas fa-arrow-circle-right"></i></a>
-					</div>
-				</div> --}}
-
-			{{-- <div class="col-lg-3 col-6">
-					<div class="small-box bg-warning">
+				<div class="col-lg-3 col-6">
+					<div class="small-box bg-info">
 						<div class="inner">
-							<h3>44</h3>
-							<p>User Registrations</p>
+							<h3>{{ count($sucursals) }}</h3>
+							<p>Cantidad de Inmuebles</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-person-add"></i>
+							<i class="ion ion-ios-home"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="{{ route('sucursals.index') }}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
-				</div> --}}
+				</div>
 
-			{{-- <div class="col-lg-3 col-6">
+				<div class="col-lg-3 col-6">
 					<div class="small-box bg-danger">
 						<div class="inner">
-							<h3>65</h3>
-							<p>Unique Visitors</p>
+							<h3>{{ count($tasks) }}</h3>
+							<p>Tareas Pendientes</p>
 						</div>
 						<div class="icon">
-							<i class="ion ion-pie-graph"></i>
+							<i class="ion ion-wineglass"></i>
 						</div>
-						<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+						<a href="{{ route('tasks.index') }}" class="small-box-footer">Más info <i class="fas fa-arrow-circle-right"></i></a>
 					</div>
-				</div> --}}
-
+				</div>
+			@endcanany
 		</div>
 	</div>
 
 	<div class="row">
-		<!-- Lista de Tareas -->
+		<!-- Lista de Tareas Administrativas -->
+		@canany(['isSuper','isAdmin','isGerente'])
+			<section class="col-lg-12 connectedSortable">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-12">
+							<div class="card mb-3">
+								<div class="card-header">
+									<i class="fas fa-tasks"></i>
+									Tareas
+								</div>
+								<div class="card-body">
+									<a href="{{ route('tasks.create') }}" class="btn btn-info mb-2"><i class="fas fa-plus"></i> Agregar Nueva Tarea</a>
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped" id="tableSucursals" width="100%" cellspacing="0">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Fecha</th>
+													<th>Cliente</th>
+													<th>Inmueble</th>
+													<th>Tarea</th>
+													<th>Responsable/s</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+											</thead>
+											<tfoot>
+												<tr>
+													<th>ID</th>
+													<th>Fecha</th>
+													<th>Cliente</th>
+													<th>Inmueble</th>
+													<th>Tarea</th>
+													<th>Responsable/s</th>
+													<th>Estado</th>
+													<th>Acciones</th>
+												</tr>
+											</tfoot>
+											<tbody>
+												@foreach($tasks as $task)
+												<tr>
+													<td>{{ $task->id }}</td>
+													<td>{{ $task->created_at != null ? $task->created_at->format('j F, Y') : $task->created_at }}</td>
+													<td>
+														@foreach($sucursals as $sucursal)
+															@if ($sucursal->id == $task->sucursals->first()->id)
+																<span class="badge badge-info">
+																	<!-- user name -->
+																	{{ $sucursal->users ? $sucursal->users->first()->name : ''}}
+																</span>
+															@endif
+														@endforeach
+													</td>
+													<td>
+														@foreach($task->sucursals as $sucursal)
+														<span class="badge badge-info">
+															{{ $sucursal->name }}
+														</span>
+														@endforeach
+													</td>
+													<td>{{ $task->title }}</td>
+													<td>
+														@foreach($task->users as $user)
+														<span class="badge badge-success">
+															{{ $user->name }}
+														</span>
+														@endforeach
+													</td>
+													<td>
+														@if ($task->state == 'Completado')
+															<span class="badge badge-success">{{ $task->state }}</span>
+														@elseif ($task->state == 'En Proceso')
+															<span class="badge badge-warning">{{ $task->state }}</span>
+														@else
+															<span class="badge badge-danger">{{ $task->state }}</span>
+														@endif
+													</td>
+													<td>
+														<div class="d-flex justify-content-center">
+															<a class="btn btn-primary btn-sm align-self-center mr-2" href="{{ url('/tasks/'. $task->id ) }}">
+																<i class="fas fa-eye"></i> Ver
+															</a>
+														</div>
+													</td>
+												</tr>
+												@endforeach
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+			</section>
+		@endcanany
+		<!-- Lista de Tareas Operarios -->
 		@can('isOperario')
-		<section class="col-lg-8 connectedSortable">
-			<div class="row">
-				<div class="col-12 connectedSortable">
-					@foreach( $sucursals as $j => $sucursal)
+			<section class="col-lg-9 connectedSortable">
+				<div class="row">
+					<div class="col-12 connectedSortable">
+						@foreach( $sucursals as $j => $sucursal)
 						<div class="card">
 							<div class="card-header">
 								<h3 class="card-title"><strong>Lista de Tareas</strong> - {{ $sucursal->name }}</h3>
@@ -96,26 +183,26 @@
 							<div class="card-body">
 								<ul class="todo-list ui-sortable" data-widget="todo-list">
 									@foreach( $tasks as $k => $task )
-										@if($task->sucursals[0]->id == $sucursal->id)
-											<li class="{{ $task->is_complete ? 'done complete' : '' }}">
-												<span class="handle">
-													<i class="fas fa-ellipsis-v"></i>
-													<i class="fas fa-ellipsis-v"></i>
-												</span>
-												<div class="icheck-primary d-inline ml-2">
-													<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
-													<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
-												</div>
-												<span class="text">{{ $task->title }}</span>
-												<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
-												<a class="tools" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
-													<i class="fas fa-edit" title="Subir Evidencia"></i>
-												</a>
-												<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
-													<i class="fas fa-clock" title="En Proceso"></i>
-												</div>
-											</li>
-										@endif
+									@if($task->sucursals[0]->id == $sucursal->id)
+									<li class="{{ $task->is_complete ? 'done complete' : '' }}">
+										<span class="handle">
+											<i class="fas fa-ellipsis-v"></i>
+											<i class="fas fa-ellipsis-v"></i>
+										</span>
+										<div class="icheck-primary d-inline ml-2">
+											<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
+											<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
+										</div>
+										<span class="text">{{ $task->title }}</span>
+										<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
+										<a class="tools" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
+											<i class="fas fa-edit" title="Subir Evidencia"></i>
+										</a>
+										<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
+											<i class="fas fa-clock" title="En Proceso"></i>
+										</div>
+									</li>
+									@endif
 									@endforeach
 								</ul>
 							</div>
@@ -123,10 +210,10 @@
 								<strong>Dirección:</strong> {{ $sucursal->address }} | <strong>Horario:</strong> {{ $sucursal->schedule }}
 							</div>
 						</div>
-					@endforeach
+						@endforeach
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 		@endcan
 	</div>
 

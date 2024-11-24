@@ -45,7 +45,7 @@
 				</div>
 				<div class="form-group">
 					<label for="address">Direccion</label>
-					<input type="address" name="address" id="address" class="form-control" placeholder="Direccion" value="{{ old('address') }}"  required>
+					<input type="address" name="address" id="address" class="form-control" placeholder="Direccion" value="{{ old('address') }}">
 					@error('address')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="form-group">
 					<label for="phone">Telefono</label>
-					<input type="phone" name="phone" id="phone" class="form-control" placeholder="Telefono" value="{{ old('phone') }}"  required>
+					<input type="phone" name="phone" id="phone" class="form-control" placeholder="Telefono" value="{{ old('phone') }}">
 					@error('phone')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -62,17 +62,8 @@
 					@enderror
                 </div>
                 <div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" placeholder="Email" value="{{ old('email') }}"  required>
-					@error('email')
-						<span class="invalid-feedback" role="alert">
-							<strong>{{ $message }}</strong>
-						</span>
-					@enderror
-                </div>
-                <div class="form-group">
 					<label for="schedule">Horario</label>
-					<input type="schedule" name="schedule" id="schedule" class="form-control" placeholder="Abierto de 08:00 a 20:00hs" value="{{ old('schedule') }}"  required>
+					<input type="schedule" name="schedule" id="schedule" class="form-control" placeholder="Abierto de 08:00 a 20:00hs" value="{{ old('schedule') }}">
 					@error('schedule')
 						<span class="invalid-feedback" role="alert">
 							<strong>{{ $message }}</strong>
@@ -81,7 +72,7 @@
                 </div>
                 <div class="form-group">
 					<label for="gerents">Asignado</label>
-					<select name="gerents[]" id="select_gerent" class="form-control selectpicker" multiple data-live-search="true">
+					<select name="gerents[]" id="select_gerent" class="form-control selectpicker" data-live-search="true">
 						<option>Seleccione Asignado</option>
 						@foreach ( $users as $user )
 							<option value="{{ $user->id }}">{{ $user->name }}</option>
@@ -98,7 +89,7 @@
 	</div>
 	<div class="row">
 	  <div class="col-12">
-		<a href="{{ url()->previous() }}" class="btn btn-secondary">Cancelar</a>
+	  	<a href="{{ url()->previous() }}" class="btn btn-dark"><i class="fas fa-arrow-left"></i> Volver</a>
 	  </div>
 	</div>
   </section>
