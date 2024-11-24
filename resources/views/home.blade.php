@@ -172,44 +172,44 @@
 				<div class="row">
 					<div class="col-12 connectedSortable">
 						@foreach( $sucursals as $j => $sucursal)
-						<div class="card">
-							<div class="card-header">
-								<h3 class="card-title"><strong>Lista de Tareas</strong> - {{ $sucursal->name }}</h3>
-								<div class="card-tools">
-									<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
-									<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"><i class="fas fa-times"></i></button>
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title"><strong>Lista de Tareas</strong> - {{ $sucursal->name }}</h3>
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse"><i class="fas fa-minus"></i></button>
+										<button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="card-body">
+									<ul class="todo-list ui-sortable" data-widget="todo-list">
+										@foreach( $tasks as $k => $task )
+											@if($task->sucursals[0]->id == $sucursal->id)
+												<li class="{{ $task->is_complete ? 'done complete' : '' }}">
+													<span class="handle">
+														<i class="fas fa-ellipsis-v"></i>
+														<i class="fas fa-ellipsis-v"></i>
+													</span>
+													<div class="icheck-primary d-inline ml-2">
+														<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
+														<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
+													</div>
+													<span class="text">{{ $task->title }}</span>
+													<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
+													<a class="tools text-white btn btn-xs btn-primary d-block" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
+													<i class="fas fa-lg fa-edit" title="Subir Evidencia"></i> Editar
+													</a>
+													<div class="tools text-white btn-xs mr-2 btn btn-warning todo-state {{ $task->state == 'En Proceso' ? 'd-none' : 'd-block' }}" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
+														<i class="fas fa-lg fa-clock" title="Comenzar"></i> Comenzar
+													</div>
+												</li>
+											@endif
+										@endforeach
+									</ul>
+								</div>
+								<div class="card-footer">
+									<strong>Dirección:</strong> {{ $sucursal->address }} | <strong>Horario:</strong> {{ $sucursal->schedule }}
 								</div>
 							</div>
-							<div class="card-body">
-								<ul class="todo-list ui-sortable" data-widget="todo-list">
-									@foreach( $tasks as $k => $task )
-									@if($task->sucursals[0]->id == $sucursal->id)
-									<li class="{{ $task->is_complete ? 'done complete' : '' }}">
-										<span class="handle">
-											<i class="fas fa-ellipsis-v"></i>
-											<i class="fas fa-ellipsis-v"></i>
-										</span>
-										<div class="icheck-primary d-inline ml-2">
-											<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
-											<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
-										</div>
-										<span class="text">{{ $task->title }}</span>
-										<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
-										<a class="tools" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
-											<i class="fas fa-edit" title="Subir Evidencia"></i>
-										</a>
-										<div class="tools todo-state" data-id="{{ $task->id }}" data-state="{{ $task->state }}" data-process="{{$j.$k}}">
-											<i class="fas fa-clock" title="En Proceso"></i>
-										</div>
-									</li>
-									@endif
-									@endforeach
-								</ul>
-							</div>
-							<div class="card-footer">
-								<strong>Dirección:</strong> {{ $sucursal->address }} | <strong>Horario:</strong> {{ $sucursal->schedule }}
-							</div>
-						</div>
 						@endforeach
 					</div>
 				</div>

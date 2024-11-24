@@ -30,12 +30,19 @@ class HomeController extends Controller
     {
         if (auth()->user()->roles->first()->slug == "superadmin" || auth()->user()->roles->first()->slug == "admin" || auth()->user()->roles->first()->slug == "gerente") {
             $sucursals = Sucursal::with('users')->orderBy('id', 'asc')->get();
-            $tasks = Task::with('users')->where('state', '!=', 'Completado')->orderBy('id', 'desc')->get();
+            $tasks   = Task::with('users')->where('state', '!=', 'Completado')->orderBy('id', 'desc')->get();
             $clients = User::whereHas('roles', function ($query) {
                 $query->where('slug', 'cliente');
             })->count();
         } else {
-            $sucursals = auth()->user()->sucursals;
+            $sucursals = Sucursal::with('todo_tasks.users')
+                ->whereHas('todo_tasks', function ($query) {
+                    $query->whereHas('users', function ($query) {
+                        $query->where('id', auth()->id());
+                    });
+                })
+                ->get();
+
             $tasks = auth()->user()->tasks;
             $clients = 0;
         }

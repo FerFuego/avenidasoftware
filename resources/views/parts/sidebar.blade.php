@@ -24,6 +24,10 @@
                     {{-- Nothing --}}
                 @endcannot
 
+                @can('isOperario')
+                    {{-- Nothing --}}
+                @endcan
+
                 @can('isSuper')
                     <li class="nav-item">
                         <a href="{{ url('/roles') }}" class="nav-link">
@@ -66,15 +70,6 @@
                         <a href="{{ url('/todos/check') }}" class="nav-link">
                             <i class="nav-icon fas fa-tasks"></i>
                             <p>Tareas</p>
-                        </a>
-                    </li>
-                @endcan
-
-                @can('isOperario')
-                    <li class="nav-item has-treeview">
-                        <a href="{{ url('/') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Dashboard</p>
                         </a>
                     </li>
                 @endcan
