@@ -23,13 +23,13 @@
                 </div>
             </li>
         @endcanany
-    @if ( Auth::user()->roles->isNotEmpty() ) 
-        <li class="nav-item d-none d-sm-inline-block">
-            <span class="nav-link">
-                <i class="fa fa-user-circle"></i>
-                {{ Auth::user()->roles->first()->name }}
-            </span>
-        </li>
-    @endif
+        @if ( Auth::user()->roles->isNotEmpty() ) 
+            <li class="nav-item d-none d-sm-inline-block">
+                <span class="nav-link">
+                    <i class="fa fa-user-circle"></i>
+                    {{ Auth::user()->name }}
+                </span>
+            </li>
+        @endif
     </ul>
 </nav>
