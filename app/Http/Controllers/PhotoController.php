@@ -34,4 +34,12 @@ class PhotoController extends Controller
             return response()->json(['error' => 'File upload failed.']);
         }
     }
+
+    public function delete(Photo $photo) {
+        $photo->delete();
+        // Elimina el archivo físico
+        Storage::delete($photo->photo_path);
+
+        return response()->json(['success' => 'Photo deleted successfully']);
+    }
 }

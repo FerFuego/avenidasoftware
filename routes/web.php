@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('download/{file}', function ($file) {
         return Response::download( public_path('uploads/') . $file);
     });
+    Route::delete('photos/{photo}', [App\Http\Controllers\PhotoController::class, 'delete']);
 });
 
 

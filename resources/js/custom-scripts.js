@@ -535,3 +535,28 @@ document.addEventListener('DOMContentLoaded', () => {
         body.classList.toggle('sidebar-open');
     });
 });
+
+/**
+ * Delete Photo
+ */
+function deletePhoto(id) {
+    if (confirm('¿Estás seguro de que deseas eliminar esta foto?')) {
+        const ops = {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: JSON.stringify(id),
+            url: '/photos/' + id,
+        };
+
+        axios(ops).then(function (response) {
+            window.location.reload();
+        })
+
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+}

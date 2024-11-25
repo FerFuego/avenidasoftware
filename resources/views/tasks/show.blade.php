@@ -163,9 +163,14 @@
                             <div class="row">
                             @foreach($task->photos as $file)
                                 <div class="col-4 mb-3">
-                                    <a href="{{ asset($file->photo_path) }}" target="_blank">
+                                    <a href="{{ asset($file->photo_path) }}" data-id="{{ $file->id }}" target="_blank">
                                         <img src="{{ asset($file->photo_path) }}" alt="" width="100%">
                                     </a>
+                                    @cannot('isCliente')
+                                    <button class="btn btn-danger photo-delete" onclick="deletePhoto({{ $file->id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                    @endcannot
                                 </div>
                             @endforeach
                         </div>
