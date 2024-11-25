@@ -19,16 +19,7 @@ class NotificationController extends Controller
         if ( $request->filter == 'all' ) {
             $query->orderBy('created_at', 'desc');
         } else {
-            // Admins
-            if (auth()->user()->roles->first()->slug == "superadmin" || auth()->user()->roles->first()->slug == "admin") {
-                $query->where('state', '0')
-                    ->orderBy('created_at', 'desc');
-            } else {
-                // Operario
-                $query->where('user_id', auth()->user()->id)
-                    ->where('state', '0')
-                    ->orderBy('created_at', 'desc');
-            }
+            $query->where('state', '0')->orderBy('created_at', 'desc');
         }
 
         $notifications = $query->get();
