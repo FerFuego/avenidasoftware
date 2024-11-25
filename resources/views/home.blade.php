@@ -137,7 +137,7 @@
 														@endforeach
 													</td>
 													<td>
-														@if ($task->state == 'Completado')
+														@if ($task->state == 'Completada')
 															<span class="badge badge-success">{{ $task->state }}</span>
 														@elseif ($task->state == 'En Proceso')
 															<span class="badge badge-warning">{{ $task->state }}</span>

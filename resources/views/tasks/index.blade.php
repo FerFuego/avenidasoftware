@@ -39,7 +39,7 @@
                                 <!-- If get state is pending in url -->
                                 <option value="Pendiente" {{ request()->get('state') == 'Pendiente' ? 'selected' : '' }}>Pendientes</option>
                                 <option value="Cancelada" {{ request()->get('state') == 'Cancelada' ? 'selected' : '' }}>Canceladas</option>
-                                <option value="Completado" {{ request()->get('state') == 'Completado' ? 'selected' : '' }}>Completas</option>
+                                <option value="Completada" {{ request()->get('state') == 'Completada' ? 'selected' : '' }}>Completas</option>
                                 <option value="En Proceso" {{ request()->get('state') == 'En Proceso' ? 'selected' : '' }}>En Proceso</option>
                                 <option value="Incompleta" {{ request()->get('state') == 'Incompleta' ? 'selected' : '' }}>Incompleta</option>
                             </select>
@@ -114,7 +114,7 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            @if ($task->state == 'Completado')
+                                            @if ($task->state == 'Completada')
                                                 <span class="badge badge-success">{{ $task->state }}</span>
                                             @elseif ($task->state == 'En Proceso')
                                                 <span class="badge badge-warning">{{ $task->state }}</span>

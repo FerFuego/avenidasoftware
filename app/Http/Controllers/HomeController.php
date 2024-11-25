@@ -32,7 +32,7 @@ class HomeController extends Controller
             
             // admin
             $sucursals = Sucursal::with('users')->orderBy('id', 'asc')->get();
-            $tasks     = Task::with('users')->where('state', '!=', 'Completado')->orderBy('id', 'desc')->get();
+            $tasks     = Task::with('users')->where('tasks.state', '!=', 'Completada')->orderBy('id', 'desc')->get();
             $clients   = User::whereHas('roles', function ($query) {
                             $query->where('slug', 'cliente');
                          })->count();

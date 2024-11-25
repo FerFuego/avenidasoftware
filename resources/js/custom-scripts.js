@@ -346,7 +346,7 @@ function setStateBooking(id, state) {
     };
 
     axios(ops).then(function (response) {
-        var classe = (state == 'Completado') ? 'badge-success' : (state == 'Cancelado') ? 'd-none' : 'badge-warning';
+        var classe = (state == 'Completada') ? 'badge-success' : (state == 'Cancelado') ? 'd-none' : 'badge-warning';
         $('#'+id).removeClass('badge-success');
         $('#'+id).removeClass('badge-danger');
         $('#'+id).removeClass('d-none'); //new
@@ -503,7 +503,7 @@ function getState(data, time) {
     data.forEach(function(item) {
         var newT = format(time, 'yyyy-MM-dd hh:mm:ss');
         if (item.start == newT) {
-            state = (item.state == 'Completado') ? 'badge-success': (item.state == 'Cancelado') ? 'badge-danger': (item.state == 'En proceso') ? 'badge-warning':'badge-info';
+            state = (item.state == 'Completada') ? 'badge-success': (item.state == 'Cancelado') ? 'badge-danger': (item.state == 'En proceso') ? 'badge-warning':'badge-info';
         }
     })
 

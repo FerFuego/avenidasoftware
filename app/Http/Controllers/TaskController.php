@@ -22,8 +22,10 @@ class TaskController extends Controller
 
         if ($request->all() && $request->state != 'all') {
             $tasks = $tasks->where('state', $request->state);
-        } else {
-            $tasks = $tasks->where('state', '!=', 'Completado');
+        } else if ($request->all() && $request->state == 'all') {
+            // all
+        }else {
+            $tasks = $tasks->where('state', '!=', 'Completada');
         }
 
         if ($request->all()) {
@@ -191,12 +193,28 @@ class TaskController extends Controller
      * @param  \App\Models\TodoList  $todoList
      * @return \Illuminate\Http\Response
      */
-    public function change_state(Request $request, Task $task)
+    public function change_state(Request $request)
     {
         $t = Task::find($request->task_id);
         $t->fill($request->only('state', 'is_complete'))->update();
         
         return response()->json( $request->all() ); 
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\TodoList  $todoList
+     * @return \Illuminate\Http\Response
+     */
+    public function observations(Request $request, Task $task) {
+        $task->fill($request->only('obser_operario', 'obser_cliente'));
+        $task->update();
+        
+        return view('tasks.show ', [
+            'task' => $task
+        ]);
     }
 
     /**

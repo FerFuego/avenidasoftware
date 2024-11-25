@@ -15,6 +15,8 @@ class Task extends Model
         'state',
         'is_complete',
         'due_date',
+        'obser_operario',
+        'obser_cliente'
     ];
 
     protected $with = ['users', 'sucursals', 'photos'];

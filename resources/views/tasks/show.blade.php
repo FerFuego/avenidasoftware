@@ -78,7 +78,32 @@
                         <p>{!! nl2br($task->description) !!}</p>
                     </div>
                     <div class="card-footer row">
-                        @canany(['isSuper','isAdmin','isGerente','isOperario'])
+                            <div class="col-12 mb-3 mt-3">
+                                <form action="{{ url('tasks/observations/'. $task->id) }}" method="POST">
+                                    @method('PATCH')
+                                    @csrf()
+                                    @canany(['isSuper','isAdmin','isGerente','isOperario'])
+                                    <div class="form-group">
+                                        <label>Obsevación del operario (Opcional)</label>
+                                        <!-- if user isn't a operario textarea is read only -->
+                                        <textarea name="obser_operario" class="form-control" rows="4" placeholder="Escriba aquí su observación" {{ (auth()->user()->roles->first()->slug == 'operario') ? '' : 'readonly' }}>{{ $task->obser_operario }}</textarea>
+                                    </div>
+                                    @endcanany
+                                    @canany(['isSuper','isAdmin','isGerente','isCliente'])
+                                    <div class="form-group">
+                                        <label>Obsevación del cliente (Opcional)</label>
+                                        <!-- if user isn't a client textarea is read only -->
+                                        <textarea name="obser_cliente" class="form-control" rows="4" placeholder="Escriba aquí su observación" {{ (auth()->user()->roles->first()->slug == 'cliente') ? '' : 'readonly' }}>{{ $task->obser_cliente }}</textarea>
+                                    </div>
+                                    @endcanany
+                                    @canany(['isOperario','isCliente'])
+                                    <div class="form-group">
+                                        <input type="submit" value="Enviar Observación" class="btn btn-success float-right">
+                                    </div>
+                                    @endcanany
+                                </form>
+                            </div>
+                            @cannot('isCliente')
                             <div class="col-12 mb-5">
                                 <h6><b>Subir evidencia del trabajo realizado</b></h6>
                                 <form class="dropzone" id="dropzone-mulitple" action="{{ url('photos/store/'.$task->id) }}" method="POST" enctype="multipart/form-data" autocomplete="off" novalidate>
@@ -132,7 +157,7 @@
                                     })
                                 </script>
                             </div>
-                        @endcanany
+                            @endcannot
                         <div class="col-12">
                             <h6><b>Evidencia del trabajo realizado</b></h6>
                             <div class="row">

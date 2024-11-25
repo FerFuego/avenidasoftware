@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tasks/check', [App\Http\Controllers\TaskController::class,'check']);
     Route::post('tasks/change-state', [App\Http\Controllers\TaskController::class,'change_state']);
     Route::post('tasks/complete', [App\Http\Controllers\TaskController::class,'complete']);
+    Route::patch('tasks/observations/{task}', [App\Http\Controllers\TaskController::class,'observations']);
     Route::resource('notifications', 'NotificationController');
     Route::post('photos/store/{task}', [App\Http\Controllers\PhotoController::class, 'store']);
     Route::get('download/{file}', function ($file) {
