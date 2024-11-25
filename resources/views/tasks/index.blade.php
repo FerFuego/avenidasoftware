@@ -89,8 +89,8 @@
                                 @foreach($tasks as $task)
                                     <tr>
                                         <td>{{ $task->id }}</td>
-                                        <td>{{ $task->created_at != null ? $task->created_at->format('j F, Y') : $task->created_at }}</td>
-                                        <td>{{ $task->due_date }}</td>
+                                        <td>{{ $task->created_at->locale('es')->translatedFormat(('j F, Y')) }}</td>
+                                        <td>{{ Carbon\Carbon::parse($task->due_date)->locale('es')->translatedFormat(('j F, Y')) }}</td>
                                         <td>
                                             @foreach($sucursals as $sucursal)
                                                 @if ($sucursal->id == $task->sucursals->first()->id)

@@ -30,8 +30,8 @@
                         <div class="row">
                             <div class="col-9">
                                 <h3><b>{{ $task->title }}</b></h3>
-                                <h6><b>Fecha de creación:</b> {{ $task->created_at->format('j F, Y') }}</b></h6>
-                                <h6><b>Fecha de entrega:</b> {{ $task->due_date }}</b></h6>
+                                <h6><b>Fecha de creación:</b> {{ $task->created_at->locale('es')->translatedFormat(('j F, Y')) }}</b></h6>
+                                <h6><b>Fecha de entrega:</b> {{ Carbon\Carbon::parse($task->due_date)->locale('es')->translatedFormat(('j F, Y')) }}</b></h6>
                             </div>
                             <div class="col-3 text-right">
                                 <h6>

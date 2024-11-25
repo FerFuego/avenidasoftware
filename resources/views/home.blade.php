@@ -85,7 +85,8 @@
 											<thead>
 												<tr>
 													<th>ID</th>
-													<th>Fecha</th>
+													<th>Fecha de Creación</th>
+													<th>Fecha de Entrega</th>
 													<th>Cliente</th>
 													<th>Inmueble</th>
 													<th>Tarea</th>
@@ -97,7 +98,8 @@
 											<tfoot>
 												<tr>
 													<th>ID</th>
-													<th>Fecha</th>
+													<th>Fecha de Creación</th>
+													<th>Fecha de Entrega</th>
 													<th>Cliente</th>
 													<th>Inmueble</th>
 													<th>Tarea</th>
@@ -110,7 +112,8 @@
 												@foreach($tasks as $task)
 												<tr>
 													<td>{{ $task->id }}</td>
-													<td>{{ $task->created_at != null ? $task->created_at->format('j F, Y') : $task->created_at }}</td>
+													<td>{{ $task->created_at->locale('es')->translatedFormat(('j F, Y')) }}</td>
+													<td>{{ Carbon\Carbon::parse($task->due_date)->locale('es')->translatedFormat(('j F, Y')) }}</td>
 													<td>
 														@foreach($sucursals as $sucursal)
 															@if ($sucursal->id == $task->sucursals->first()->id)
