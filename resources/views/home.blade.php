@@ -84,7 +84,6 @@
 										<table class="table table-bordered table-striped" id="tableSucursals" width="100%" cellspacing="0">
 											<thead>
 												<tr>
-													<th>ID</th>
 													<th>Fecha de Creación</th>
 													<th>Fecha de Entrega</th>
 													<th>Cliente</th>
@@ -97,7 +96,6 @@
 											</thead>
 											<tfoot>
 												<tr>
-													<th>ID</th>
 													<th>Fecha de Creación</th>
 													<th>Fecha de Entrega</th>
 													<th>Cliente</th>
@@ -111,7 +109,6 @@
 											<tbody>
 												@foreach($tasks as $task)
 												<tr>
-													<td>{{ $task->id }}</td>
 													<td>{{ $task->created_at->locale('es')->translatedFormat(('j F, Y')) }}</td>
 													<td>{{ Carbon\Carbon::parse($task->due_date)->locale('es')->translatedFormat(('j F, Y')) }}</td>
 													<td>

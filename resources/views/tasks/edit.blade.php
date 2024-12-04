@@ -47,7 +47,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="due_date">Fecha de Entrega</label>
-									<input type="datetime-local" name="due_date" id="due_date" class="form-control" placeholder="Fecha de Entrega" value="{{ old('due_date') }}">
+									<input type="date" name="due_date" id="due_date" class="form-control" placeholder="Fecha de Entrega" value="{{ old('due_date', date('Y-m-d', strtotime($task->due_date))) }}">
 									@error('due_date')
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $message }}</strong>
