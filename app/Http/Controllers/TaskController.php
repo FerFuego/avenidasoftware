@@ -144,6 +144,7 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
+
         $task->fill($request->all())->update();
 
         // detach all users and sucursals

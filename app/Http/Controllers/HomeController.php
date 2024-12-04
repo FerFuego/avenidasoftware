@@ -54,7 +54,7 @@ class HomeController extends Controller
 
             // cliente
             $sucursals  = auth()->user()->sucursals;
-            $tasks      = Task::with('users')->orderBy('id', 'desc')->get();
+            $tasks      = Task::with('users')->orderBy('created_at', 'desc')->get();
             $clients    = 0;
         }
 
