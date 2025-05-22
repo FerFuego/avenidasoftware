@@ -183,7 +183,7 @@
 								<div class="card-body">
 									<ul class="todo-list ui-sortable" data-widget="todo-list">
 										@foreach( $tasks as $k => $task )
-											@if($task->sucursals[0]->id == $sucursal->id)
+											@if( isset($task->sucursals) && $task->sucursals->first()->id == $sucursal->id)
 												<li class="{{ $task->is_complete ? 'done complete' : '' }}">
 													<span class="handle">
 														<i class="fas fa-ellipsis-v"></i>
@@ -232,7 +232,7 @@
 								<div class="card-body">
 									<ul class="todo-list ui-sortable" data-widget="todo-list">
 										@foreach( $tasks as $k => $task )
-											@if($task->sucursals[0]->id == $sucursal->id)
+											@if( isset($task->sucursals) && $task->sucursals->first()->id == $sucursal->id)
 												<li class="{{ $task->is_complete ? 'done complete' : '' }}">
 													<span class="text">{{ $task->title }}</span>
 													<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
