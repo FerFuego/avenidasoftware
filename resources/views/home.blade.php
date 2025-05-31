@@ -7,7 +7,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>Dashboard</h1>
+				<h1>Panel de Control</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -183,16 +183,16 @@
 								<div class="card-body">
 									<ul class="todo-list ui-sortable" data-widget="todo-list">
 										@foreach( $tasks as $k => $task )
-											@if( isset($task->sucursals) && $task->sucursals->first()->id == $sucursal->id)
+											@if( !is_null($task->sucursals->first()) && $task->sucursals->first()->id == $sucursal->id)
 												<li class="{{ $task->is_complete ? 'done complete' : '' }}">
 													<span class="handle">
 														<i class="fas fa-ellipsis-v"></i>
 														<i class="fas fa-ellipsis-v"></i>
 													</span>
-													<div class="icheck-primary d-inline ml-2">
+													<!-- <div class="icheck-primary d-inline ml-2">
 														<input type="checkbox" value="{{ $task->id }}" name="task_id" id="tasks{{ $j.$k }}" {{ $task->is_complete ? 'checked' : '' }}>
 														<label for="tasks{{ $j.$k }}" title="Finalizar Tarea"></label>
-													</div>
+													</div> -->
 													<span class="text">{{ $task->title }}</span>
 													<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
 													<a class="tools text-white btn btn-xs btn-primary d-block" data-id="{{ $task->id }}" href="{{ url('/tasks/'.$task->id) }}" title="Ver Evidencia">
@@ -232,7 +232,7 @@
 								<div class="card-body">
 									<ul class="todo-list ui-sortable" data-widget="todo-list">
 										@foreach( $tasks as $k => $task )
-											@if( isset($task->sucursals) && $task->sucursals->first()->id == $sucursal->id)
+											@if( !is_null($task->sucursals->first()) && $task->sucursals->first()->id == $sucursal->id)
 												<li class="{{ $task->is_complete ? 'done complete' : '' }}">
 													<span class="text">{{ $task->title }}</span>
 													<small class="badge badge-warning {{ $task->state == 'En Proceso' ? 'inline-block' : 'd-none' }}" id="process{{$j.$k}}"><i class="far fa-clock"></i> En Proceso</small>
