@@ -65612,6 +65612,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     elem.classList.add("d-none");
                     elem.classList.remove("inline-block");
                 }
+                
+                window.location.reload();
             })
     
             .catch(function (error) {
