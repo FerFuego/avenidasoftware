@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a href="{{ url('/') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Dashboard</p>
+                        <p>Tablero Principal</p>
                     </a>
                 </li>
                 
